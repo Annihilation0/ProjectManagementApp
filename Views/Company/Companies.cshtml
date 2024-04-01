@@ -1,0 +1,65 @@
+﻿@model IQueryable<ProjectManagementApp.Models.Models.Company>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Companies</title>
+</head>
+<body>
+    <h1>All Companies</h1>
+
+    <div class="container">
+        <table id="companiesTable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th id="companyIDHeader" onclick="sortTable('companiesTable', 0)">Company ID</th>
+                    <th id="companyNameHeader" onclick="sortTable('companiesTable', 1)">Company Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var company in Model)
+                {
+                    <tr class="company-row" data-company-id="@company.CompanyID">
+                        <td>@company.CompanyID</td>
+                        <td>@company.CompanyName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.company-row').click(function () {
+                var companyId = $(this).data('company-id');
+                window.location.href = '/Company/Details?companyId=' + companyId;
+            });
+        });
+        /*
+        function sortTable(tableId, columnIndex) {
+            const table = document.getElementById(tableId);
+            const rows = Array.from(table.getElementsByTagName('tr')).slice(1); // Exclude table header row
+            const shouldSortDescending = table.rows[0].cells[columnIndex].classList.contains('sorted') && table.rows[0].cells[columnIndex].classList.contains('descending');
+
+            rows.sort((a, b) => {
+                const aValue = a.cells[columnIndex].innerText;
+                const bValue = b.cells[columnIndex].innerText;
+                return shouldSortDescending ? bValue.localeCompare(aValue) : aValue.localeCompare(bValue);
+            });
+
+            rows.forEach(row => table.appendChild(row));
+
+            // Remove 'sorted' and 'descending' classes from all columns
+            Array.from(table.rows[0].cells).forEach(cell => cell.classList.remove('sorted', 'ascending', 'descending'));
+
+            // Add 'sorted' class to the clicked column
+            table.rows[0].cells[columnIndex].classList.add('sorted');
+
+            // Toggle 'ascending' or 'descending' class based on current sort order
+            table.rows[0].cells[columnIndex].classList.add(shouldSortDescending ? 'ascending' : 'descending');
+        }
+        */
+    </script>
+</body>
+</html>
+
