@@ -8,7 +8,6 @@ namespace ProjectManagementApp.Models.Models
     {
         public int CompanyID { get; set; }
         public string? CompanyName { get; set; }
-
         public List<Employee> Employees { get; set; } 
     }
 
@@ -20,7 +19,6 @@ namespace ProjectManagementApp.Models.Models
         public string? MiddleName { get; set; }
         public string? Email { get; set; }
         public int CompanyID { get; set; }
-
         public Company Company { get; set; } 
     }
 
@@ -31,7 +29,6 @@ namespace ProjectManagementApp.Models.Models
         public int ClientCompanyID { get; set; }
         public int ExecutionCompanyID { get; set; }
         public int ProjectManagerID { get; set; }
-        // явно указываем тип столбца, потому что EF Core не преобразует тип DateTime 
         [Column(TypeName = "datetime")]
         public DateTime StartDate { get; set; }
         [Column(TypeName = "datetime")]

@@ -1,0 +1,29 @@
+﻿<!--Wizard's first step. Filling in information about the project-->
+@model ProjectManagementApp.Models.ViewModels.WizardViewModel
+@{
+    var priorities = new List<string>();
+    priorities.Add("low");
+    priorities.Add("medium");
+    priorities.Add("high");
+}
+
+<form asp-action="WizardCompanyChoice" method="post">
+    <label>Project name</label>
+    <input class="form-control" asp-for="Project.ProjectName" />
+
+    <label>Start date</label>
+    <input class="form-control" type="date" asp-for="Project.StartDate" />
+
+    <label>End date</label>
+    <input class="form-control" type="date" asp-for="Project.EndDate" />
+
+    <label>Priority</label>
+    <select class="form-select form-select-sm" aria-label=".form-select-sm example"  asp-for="Project.Priority">
+        @foreach (var priority in priorities)
+        {
+            <option value="@priority">@priority</option>
+        }
+    </select>
+
+    <br /><div align="right"><button class="btn btn-outline-primary" type="submit">Next</button><div></div></div>
+</form>

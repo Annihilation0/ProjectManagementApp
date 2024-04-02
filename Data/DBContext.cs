@@ -5,12 +5,10 @@ namespace ProjectManagementApp.Data
 {
     public class DBContext : DbContext
     {
-
         public  DbSet<Company> Companies { get; set; }
         public  DbSet<Employee> Employees { get; set; }
         public  DbSet<Project> Projects { get; set; }
         public  DbSet<ProjectEmployee> ProjectEmployees { get; set; }
-
 
         public DBContext(DbContextOptions<DBContext> options) : base(options)
         {

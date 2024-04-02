@@ -1,0 +1,26 @@
+﻿<!--Form for adding a new employee-->
+@model ProjectManagementApp.Models.ViewModels.EmployeeCompaniesViewModel
+
+<form asp-action="AddEmployee" method="post">
+    <label>First name</label>
+    <input class="form-control" asp-for="Employee.FirstName" />
+
+    <label>Middle name</label>
+    <input class="form-control" asp-for="Employee.LastName" />
+
+    <label>Last name</label>
+    <input class="form-control" asp-for="Employee.MiddleName" />
+
+    <label>Email</label>
+    <input id="email" class="form-control" asp-for="Employee.Email" />
+
+    <label>Company</label>
+    <select class="form-select form-select-sm" aria-label=".form-select-sm example" asp-for="Employee.CompanyID">
+        @foreach (var company in Model.Companies)
+        {
+            <option value="@company.CompanyID">@company.CompanyName</option>
+        }
+    </select>
+
+    <br /><div align="right"><button class="btn btn-outline-primary" type="submit">OK</button><div></div></div>
+</form>

@@ -19,6 +19,7 @@ namespace ProjectManagementApp.Controllers
         {
             return View();
         }
+        //Display information about all companies
         public IActionResult Companies()
         {
             var companies = context.Companies
@@ -30,6 +31,7 @@ namespace ProjectManagementApp.Controllers
 
             return View(companies);
         }
+        //Display company information
         public IActionResult Details(int companyID)
         {
             var companies = context.Companies

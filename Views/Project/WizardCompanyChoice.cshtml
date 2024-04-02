@@ -1,0 +1,20 @@
+﻿<!--Vizard's second step. Selection of the client company and the execution company-->
+@model ProjectManagementApp.Models.ViewModels.WizardViewModel
+@{
+    var companies = Model.AllCompanies.Select(c => new SelectListItem { Value = c.CompanyID.ToString(), Text = c.CompanyName });
+}
+<form asp-action="WizardManagerChoice" method="post">
+    <label>Client company</label>
+    <select class="form-select form-select-sm" aria-label=".form-select-sm example" asp-for="Project.ClientCompany.CompanyID" asp-items="companies"></select>
+
+    <label>Execution company</label>
+    <select class="form-select form-select-sm" aria-label=".form-select-sm example" asp-for="Project.ExecutionCompany.CompanyID" asp-items="companies"></select>
+    
+    <br />
+    <div align="left">
+        <a class="btn btn-outline-primary" href="@Url.Action("WizardProjectInfo", "Project")">Back</a>
+    </div>
+    <div align="right">
+        <button class="btn btn-outline-primary" type="submit">Next</button>
+    </div>
+</form>

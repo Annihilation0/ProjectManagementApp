@@ -1,0 +1,18 @@
+﻿<!--Wizard's third step. Selecting a project manager from the execution company-->
+@model ProjectManagementApp.Models.ViewModels.WizardViewModel
+@{
+
+    var employees = Model.CompanyEmployees.Select(e => new SelectListItem { Value = e.EmployeeID.ToString(), Text = e.FullName });
+}
+<form asp-action="AddProject" method="post">
+    <label>Project manager</label>
+    <select class="form-select form-select-sm" aria-label=".form-select-sm example" asp-for="Project.ProjectManagerID" asp-items="employees"></select>
+
+    <br />
+    <div align="left">
+        <a class="btn btn-outline-primary" href="@Url.Action("WizardCompanyChoice", "Project")">Back</a>
+    </div>
+    <div align="right">
+        <button class="btn btn-outline-primary" type="submit">Next</button>
+    </div>
+</form>

@@ -1,0 +1,72 @@
+﻿<!--Fourth step of wizardry. Selection of employees for the project from the execution company-->
+@model ProjectManagementApp.Models.ViewModels.WizardViewModel
+
+@{
+    TempData["ProjectManagerID"] = Model.Project.ProjectManagerID;
+    TempData["ExecutionCompanyID"] = Model.Project.ExecutionCompany.CompanyID;
+
+    var roles = new List<string>();
+    roles.Add("Developer");
+    roles.Add("QA Engineer");
+    roles.Add("Designer");
+    var companyEmployees = Model.CompanyEmployees;
+    var projectEmployees = Model.ProjectEmployees;
+}
+
+<h2>Current Project Employees</h2>
+
+<div class="container">
+    <table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>EmployeeID</th>
+            <th>FullName</th>
+            <th>Company</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var employee in projectEmployees)
+        {
+            <tr>
+                <td>@employee.EmployeeID</td>
+                <td>@employee.FullName</td>
+                <td>@employee.Company.CompanyName</td>
+                <td>@employee.Email</td>
+                <td>@employee.Role</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+
+<h2>Add New Project Employee</h2>
+
+<div class="container">
+<form asp-action="WizardAddEmployeeToProject">
+        <label for="EmployeeID">Employee</label>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" asp-for="SelectedEmplyee.EmployeeID">
+            @foreach (var employee in companyEmployees)
+            {
+                <option value="@employee.EmployeeID">@employee.FullName</option>
+            }
+        </select>
+        <br />
+        <label for="Role">Role</label>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" asp-for="SelectedEmplyee.Role">
+            @foreach (var role in roles)
+            {
+                <option value="@role">@role</option>
+            }
+        </select>
+        <br />
+        <div align="center">
+            <a align="left" class="btn btn-outline-primary" href="@Url.Action("WizardManagerChoice", "Project")">Back</a>
+
+            <button align="right" type="submit" class="btn btn-outline-primary">Add Employee</button>
+            <a align="left" class="btn btn-outline-primary" href="@Url.Action("Index", "Project")">OK</a>
+        </div>
+        
+</form>
+</div>

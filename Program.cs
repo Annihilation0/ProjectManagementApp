@@ -10,7 +10,12 @@ builder.Services.AddDbContext<DBContext>(options =>
 {
     options.UseSqlite("Data Source = ProjectManagementApp.db").EnableSensitiveDataLogging();
 });
+builder.Services.AddRazorPages()
+                    .AddSessionStateTempDataProvider();
+builder.Services.AddControllersWithViews()
+                    .AddSessionStateTempDataProvider();
 
+builder.Services.AddSession();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,7 +30,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(
